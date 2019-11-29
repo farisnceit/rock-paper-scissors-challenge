@@ -21,30 +21,54 @@
                     <img src="./images/logo.svg" "Rock Paper Scissors Logo" />
                 </div>
                 <div class="score-container">
-                    <div class="scorecard">
+                    <!-- <div class="scorecard">
                         <h4>SCORE</h4>
                         <p id="computer-score">0</p>
-                    </div>
+                    </div> -->
                     <div class="scorecard user">
                         <h4>SCORE</h4>
                         <p id="user-score">0</p>
                     </div>
                 </div>
             </header>
-            <main id="game-container">
-                <div class="icons paper" data-value="paper">
-                    <div class="icon-inner"><img src="./images/icon-paper.svg"/ alt="Paper Icons"></div>
+            
+            <main>
+            <div id="game-container">
+                <div class="play-ground">
+                    <div class="icons paper" data-value="paper">
+                        <div class="icon-inner"><img src="./images/icon-paper.svg" alt="Paper Icons"></div>
+                    </div>
+                    <div class="icons scissors" data-value="scissors">
+                        <div class="icon-inner"><img src="./images/icon-scissors.svg" alt="Scissors Icon" /></div>
+                    </div>
+                    <div class="icons rock" data-value="rock">
+                        <div class="icon-inner"><img src="./images/icon-rock.svg" alt="Rock Icons" /></div>
+                    </div>
+                    <div class="bg-line straight"></div>
+                    <div class="bg-line right"></div>
+                    <div class="bg-line left"></div>
                 </div>
-                <div class="icons scissors" data-value="scissors">
-                    <div class="icon-inner"><img src="./images/icon-scissors.svg" alt="Scissors Icon" /></div>
+                
+            </div>
+            <div class="winner-board" style="display: none;">
+                <div class="user-icon">
+                    <div class="icon-inner">
+                        <img alt="User Icons" />
+                    </div>
                 </div>
-                <div class="icons rock" data-value="rock">
-                    <div class="icon-inner"><img src="./images/icon-rock.svg" alt="Rock Icons" /></div>
+                <div class="game-result">
+                    <h3 id="result"></h3>
+                    <button type="button" class="play-again">Play Again</button>
                 </div>
-                <div class="bg-line straight"></div>
-                <div class="bg-line right"></div>
-                <div class="bg-line left"></div>
-            </main>
+                <div class="computer-icon">
+                        <div class="icon-inner">
+                                <img alt="Computer Icons" />
+                        </div>
+                </div>
+
+            </div>
+         </main>
+
             <div class="rules-btn">Rules</div>
             <div class="rules-modal-overlay"></div>
             <div class="rules-modal">
@@ -69,7 +93,8 @@
                     </div>
                 </div>
                 <div class="rules-modal-body">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="304" height="270">
+                    <img src="./images/image-rules.svg" alt="Game Rules">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="304" height="270">
                         <defs>
                             <linearGradient id="a" x1="50%" x2="50%" y1="0%" y2="100%">
                                 <stop offset="0%" stop-color="#FFF" stop-opacity=".097" />
@@ -170,7 +195,7 @@
                                 />
                             </g>
                         </g>
-                    </svg>
+                    </svg> -->
                 </div>
             </div>
         </section>

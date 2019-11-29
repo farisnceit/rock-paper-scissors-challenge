@@ -147,10 +147,6 @@ header .scorecard {
     transform: translateX(-50%);
 }
 
-.rock:hover {
-    transform: scale(1.1) translateX(-50%);
-}
-
 .icons .icon-inner {
     width: 150px;
     height: 150px;
@@ -171,12 +167,26 @@ header .scorecard {
     perspective: 1000px;
 }
 
-main {
+main{
+    height: calc(100vh - 150px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#game-container {
     margin: 30px auto 0;
-    width: 600px;
-    height: 500px;
+    width: 500px;
+    height: 450px;
     position: relative;
 }
+
+.winner-board{
+    width: 950px;
+    margin: auto;
+}
+
+
 
 .bg-line {
     position: absolute;
