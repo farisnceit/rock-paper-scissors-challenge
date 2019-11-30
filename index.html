@@ -33,7 +33,7 @@
             </header>
 
             <main>
-                <div id="game-container">
+                <div id="game-container" class="active">
                     <div class="play-ground">
                         <div class="icons paper" data-value="paper">
                             <div class="icon-inner"><img src="./images/icon-paper.svg" alt="Paper Icons" /></div>
@@ -49,19 +49,25 @@
                         <div class="bg-line left"></div>
                     </div>
                 </div>
-                <div class="winner-board" style="display: none;">
-                    <div class="user-icon paper">
-                        <div class="icon-inner">
-                            <img alt="User Icons" src="./images/icon-paper.svg" />
+                <div class="winner-board">
+                    <div>
+                        <h2>You Picked</h2>
+                        <div class="user-icon paper">
+                            <div class="icon-inner">
+                                <img alt="User Icons" src="./images/icon-paper.svg" />
+                            </div>
                         </div>
                     </div>
                     <div class="game-result">
-                        <h3 id="result"></h3>
+                        <h3 id="result">YOU WIN</h3>
                         <button type="button" class="play-again">Play Again</button>
                     </div>
-                    <div class="computer-icon rock">
-                        <div class="icon-inner">
-                            <img alt="Computer Icons" src="./images/icon-lizard.svg" />
+                    <div>
+                        <h2>Computer Picked</h2>
+                        <div class="computer-icon rock">
+                            <div class="icon-inner">
+                                <img alt="Computer Icons" src="./images/icon-lizard.svg" />
+                            </div>
                         </div>
                     </div>
                 </div>

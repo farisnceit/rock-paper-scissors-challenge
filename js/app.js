@@ -1,29 +1,14 @@
 //declare Inital Variables at top
 var gameInputValues = ['paper', 'scissors', 'rock'];
 var userScore = 0;
+var userInput, computerInput;
 
 console.log('It Works');
 
 gsap.from('#header', { y: '-100%', duration: 1 });
 gsap.set('.user-icon,.computer-icon', { opacity: 0, scale: 0 });
 
-var rock = document.querySelector('.rock');
-// gsap.set(rock,{x:"-50%"});
-
-rock.addEventListener(
-    'mouseover',
-    function() {
-        gsap.set(rock, { scale: 1.1 });
-    },
-    false
-);
-rock.addEventListener(
-    'mouseout',
-    function() {
-        gsap.set(rock, { scale: 1 });
-    },
-    false
-);
+var rock = document.querySelectorAll('.icons');
 
 //target element using query Selector
 var icons = document.querySelectorAll('.icons');
@@ -36,6 +21,8 @@ var rulesBtn = document.querySelector('.rules-btn');
 var rulesModal = document.querySelector('.rules-modal');
 var rulesModalOverlay = document.querySelector('.rules-modal-overlay');
 var rulesModalClose = document.querySelector('.rules-modal .close');
+
+var playAgainBtn = document.querySelector('.play-again');
 
 //Click EventListener for Opening Modal
 rulesBtn.addEventListener('click', params => {
@@ -50,8 +37,31 @@ rulesModalClose.addEventListener('click', () => {
     }, 500);
 });
 
+// create Animation Timeline for game icons
+var t1 = gsap.timeline();
+t1.fromTo('.icons', { scale: 0, autoAlpha: 0 }, { autoAlpha: 1, scale: 1, duration: 1, ease: 'power3.in' }).fromTo(
+    '.bg-line',
+    { scale: 0, autoAlpha: 0 },
+    { scale: 1, autoAlpha: 1, duration: 1, ease: 'power3.in' }
+);
+
 //Get the value from user Clicks using dataset
 icons.forEach(icon => {
+    icon.addEventListener(
+        'mouseover',
+        function() {
+            gsap.set(icon, { scale: 1.1, duration: 0.2 });
+        },
+        false
+    );
+    icon.addEventListener(
+        'mouseout',
+        function() {
+            gsap.set(icon, { scale: 1, duration: 0.2 });
+        },
+        false
+    );
+
     icon.addEventListener('click', e => {
         var userInput = icon.dataset.value;
         console.log(userInput);
@@ -60,23 +70,23 @@ icons.forEach(icon => {
         userScore++;
         userScoreElement.innerHTML = userScore;
 
-        //Stored in Temp Variable this way to remove object reference
-        var tempInput = JSON.parse(JSON.stringify(gameInputValues));
-
-        var index = tempInput.indexOf(userInput);
-        if (index !== -1) tempInput.splice(index, 1);
-
-        console.log('filterElements', tempInput);
-        console.log('gameInputValues', gameInputValues);
-
         //hiding other elements then Clicked for Animating
-        gsap.to('.bg-line,.icons', { scale: 0, duration: 1, ease: 'power4.out', opacity: 0 });
-
-        setInterval(() => {
-            gameContainer.style.display = 'none';
-            winnerBoard.style.display = 'flex';
-        }, 1000);
-
-        gsap.to('.user-icon,.computer-icon', { opacity: 1, scale: 1, duration: 1, delay: 1, ease: 'bounce.out' });
+        t2.play();
     });
+});
+
+var t2 = gsap.timeline({ paused: true });
+t2.fromTo('.icons', { scale: 1, autoAlpha: 1 }, { autoAlpha: 0, scale: 0, duration: 0.2, ease: 'power3.in' })
+    .fromTo('.bg-line', { scale: 1, autoAlpha: 1 }, { scale: 0, autoAlpha: 0, duration: 0.2, ease: 'power3.in' })
+    .to('.user-icon,.computer-icon', { opacity: 1, scale: 1, duration: 2, delay: 0.2, ease: 'back' })
+    .fromTo('.winner-board h2', { opacity: 0, y: '-50px' }, { opacity: 1, y: '0', duration: 1 }, '-=1')
+    .fromTo(
+        '.game-result h3, .game-result button',
+        { opacity: 0, y: '50px' },
+        { opacity: 1, y: '0', stagger: 0.2, duration: 1 },
+        '-=1'
+    );
+
+playAgainBtn.addEventListener('click', () => {
+    t2.reverse();
 });
