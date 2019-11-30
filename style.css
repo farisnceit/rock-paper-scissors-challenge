@@ -125,31 +125,43 @@ header .scorecard {
     transform: scale(1.1);
 }
 
+.icons.paper {
+    top: 0;
+    left: 0;
+}
+
 .paper {
     background: linear-gradient(to top left, hsl(230, 89%, 62%) 0%, hsl(230, 89%, 65%) 100%);
     box-shadow: 0 8px hsl(230, 89%, 35%);
+}
+
+.icons.scissors {
     top: 0;
-    left: 0;
+    right: 0;
 }
 
 .scissors {
     background: linear-gradient(to top left, hsl(39, 89%, 49%) 0%, hsl(40, 84%, 53%) 100%);
     box-shadow: 0 8px hsl(39, 89%, 29%);
-    top: 0;
-    right: 0;
 }
 
-.rock {
-    background: linear-gradient(to top left, hsl(349, 71%, 52%) 0%, hsl(349, 70%, 56%) 100%);
-    box-shadow: 0 8px hsl(349, 71%, 32%);
+.icons.rock {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
 }
 
+.rock {
+    background: linear-gradient(to top left, hsl(349, 71%, 52%) 0%, hsl(349, 70%, 56%) 100%);
+    box-shadow: 0 8px hsl(349, 71%, 32%);
+}
+
 .icons .icon-inner {
     width: 150px;
     height: 150px;
+}
+
+.icon-inner {
     border-radius: var(--radius-full);
     background: white;
     box-shadow: inset 0px 8px 2px rgba(59, 67, 99, 0.3);
@@ -167,7 +179,7 @@ header .scorecard {
     perspective: 1000px;
 }
 
-main{
+main {
     height: calc(100vh - 150px);
     display: flex;
     align-items: center;
@@ -181,12 +193,34 @@ main{
     position: relative;
 }
 
-.winner-board{
+.winner-board {
     width: 950px;
     margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.winner-board .icon-inner {
+    width: 250px;
+    height: 250px;
+}
 
+.winner-board .icon-inner img {
+    width: 100px;
+    height: 100px;
+}
+
+.winner-board .user-icon,
+.winner-board .computer-icon,
+.winner-board .game-result {
+    width: 300px;
+    height: 300px;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .bg-line {
     position: absolute;
@@ -234,6 +268,24 @@ main{
     transition: ease-out 0.4s;
 }
 
+.rules-modal-overlay {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-one);
+    opacity: 0;
+    top: 0;
+    left: 0;
+    transition: 0.3s opacity;
+    will-change: opacity;
+}
+
+.rules-modal-overlay.show {
+    opacity: 0.9;
+    z-index: 1000;
+}
+
 .rules-modal {
     width: 400px;
     height: 450px;
@@ -250,6 +302,8 @@ main{
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     will-change: transform;
+
+    z-index: 1001;
 }
 
 .rules-modal.show {
