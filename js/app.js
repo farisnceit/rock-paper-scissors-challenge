@@ -1,7 +1,11 @@
 //declare Inital Variables at top
 var gameInputValues = ['paper', 'scissors', 'rock'];
-var userScore = 0;
+var userScore = 0,
+    computerScore = 0,
+    TieScore = 0;
 var userInput, computerInput;
+
+var resultData;
 
 console.log('It Works');
 
@@ -13,6 +17,7 @@ var rock = document.querySelectorAll('.icons');
 //target element using query Selector
 var icons = document.querySelectorAll('.icons');
 var userScoreElement = document.getElementById('user-score');
+var computerScoreElement = document.getElementById('computer-score');
 
 var gameContainer = document.getElementById('game-container');
 var winnerBoard = document.querySelector('.winner-board');
@@ -23,6 +28,8 @@ var rulesModalOverlay = document.querySelector('.rules-modal-overlay');
 var rulesModalClose = document.querySelector('.rules-modal .close');
 
 var playAgainBtn = document.querySelector('.play-again');
+
+var result = document.getElementById('result');
 
 //Click EventListener for Opening Modal
 rulesBtn.addEventListener('click', params => {
@@ -63,12 +70,18 @@ icons.forEach(icon => {
     );
 
     icon.addEventListener('click', e => {
-        var userInput = icon.dataset.value;
-        console.log(userInput);
-        //console.log(gameInputValues[Math.floor(Math.random() * gameInputValues.length)]);
+        userInput = icon.dataset.value;
+        computerInput = gameInputValues[Math.floor(Math.random() * gameInputValues.length)];
 
-        userScore++;
-        userScoreElement.innerHTML = userScore;
+        console.log(userInput);
+        console.log(computerInput);
+
+        if (userInput === computerInput) {
+            TieScore++;
+            console.log('teie');
+        } else {
+            checkWinner(userInput, computerInput);
+        }
 
         //hiding other elements then Clicked for Animating
         t2.play();
@@ -78,7 +91,7 @@ icons.forEach(icon => {
 var t2 = gsap.timeline({ paused: true });
 t2.fromTo('.icons', { scale: 1, autoAlpha: 1 }, { autoAlpha: 0, scale: 0, duration: 0.2, ease: 'power3.in' })
     .fromTo('.bg-line', { scale: 1, autoAlpha: 1 }, { scale: 0, autoAlpha: 0, duration: 0.2, ease: 'power3.in' })
-    .to('.user-icon,.computer-icon', { opacity: 1, scale: 1, duration: 2, delay: 0.2, ease: 'back' })
+    .to('.user-icon,.computer-icon', { opacity: 1, scale: 1, duration: 1, delay: 0.2, ease: 'back' })
     .fromTo('.winner-board h2', { opacity: 0, y: '-50px' }, { opacity: 1, y: '0', duration: 1 }, '-=1')
     .fromTo(
         '.game-result h3, .game-result button',
@@ -90,3 +103,25 @@ t2.fromTo('.icons', { scale: 1, autoAlpha: 1 }, { autoAlpha: 0, scale: 0, durati
 playAgainBtn.addEventListener('click', () => {
     t2.reverse();
 });
+
+function checkWinner(userInput, computerInput) {
+    switch (userInput + computerInput) {
+        case 'scissorspaper':
+        case 'paperrock':
+        case 'rockscissors':
+            console.log('User Wins');
+            userScore++;
+            userScoreElement.innerHTML = userScore;
+            result.innerHTML = 'You Win';
+
+            break;
+        case 'rockpaper':
+        case 'paperscissors':
+        case 'scissorsrock':
+            console.log('Computer Wins');
+            computerScore++;
+            computerScoreElement.innerHTML = computerScore;
+            result.innerHTML = 'You Lose';
+            break;
+    }
+}
