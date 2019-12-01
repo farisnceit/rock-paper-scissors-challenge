@@ -27,6 +27,10 @@ var rulesModal = document.querySelector('.rules-modal');
 var rulesModalOverlay = document.querySelector('.rules-modal-overlay');
 var rulesModalClose = document.querySelector('.rules-modal .close');
 
+var userIcon = document.querySelector('.user-icon');
+var computerIcon = document.querySelector('.computer-icon');
+var userIconImg = document.querySelector('.user-icon img');
+var computerIconImg = document.querySelector('.computer-icon img');
 var playAgainBtn = document.querySelector('.play-again');
 
 var result = document.getElementById('result');
@@ -76,9 +80,18 @@ icons.forEach(icon => {
         console.log(userInput);
         console.log(computerInput);
 
+        userIcon.removeAttribute('class');
+        userIcon.classList.add(userInput, 'user-icon');
+
+        computerIcon.removeAttribute('class');
+        computerIcon.classList.add(computerInput, 'user-icon');
+
+        userIconImg.src = `/images/icon-${userInput}.svg`;
+        computerIconImg.src = `/images/icon-${computerInput}.svg`;
+
         if (userInput === computerInput) {
             TieScore++;
-            console.log('teie');
+            result.innerHTML = 'TIED';
         } else {
             checkWinner(userInput, computerInput);
         }

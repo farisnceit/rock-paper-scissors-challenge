@@ -236,6 +236,8 @@ main {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 .game-result h3 {
